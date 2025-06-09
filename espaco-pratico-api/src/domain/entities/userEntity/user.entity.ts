@@ -13,6 +13,8 @@ export class User {
 
     constructor(props: TUserProperties) {
         this._id = props.id;
+
+        User.checkFullNameIsValide(props.fullName);
         this._fullName = props.fullName;
 
         User.checkEmailIsValid(props.email);
@@ -31,6 +33,7 @@ export class User {
     }
 
     set fullName(value: string) {
+        User.checkFullNameIsValide(value);
         this._fullName = value;
     }
 
@@ -71,6 +74,15 @@ export class User {
 
         if (!result) {
             throw new Error('Invalid email format');
+        }
+    }
+
+    static checkFullNameIsValide(fullName: string): void {
+        if (fullName.length < 3) {
+            throw new Error('Full name must be at least 3 characters long');
+        }
+        if (fullName.length > 100) {
+            throw new Error('Full name must be at most 100 characters long');
         }
     }
 }

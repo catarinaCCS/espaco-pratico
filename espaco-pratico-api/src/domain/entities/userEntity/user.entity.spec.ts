@@ -92,3 +92,18 @@ describe('static password validation', () => {
         expect(() => User.checkPasswordIsValid('Teste123')).toThrow('Password must have at least one uppercase letter, one lowercase letter, one number and one special character');
     })
 })
+
+describe('static full name validation', () => {
+    it('should not throw for valid full names', () => {
+        expect(() => User.checkFullNameIsValide('Valid Name')).not.toThrow('Full name must be at least 3 characters long');
+    })
+
+    it('should throw for full names shorter than 3 characters', () => {
+        expect(() => User.checkFullNameIsValide('ab')).toThrow('Full name must be at least 3 characters long');
+    })
+
+    it('should throw for full names longer than 100 characters', () => {
+        const longName = 'a'.repeat(101);
+        expect(() => User.checkFullNameIsValide(longName)).toThrow('Full name must be at most 100 characters long');
+    })
+})
