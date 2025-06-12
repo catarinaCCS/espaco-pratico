@@ -44,3 +44,6 @@ next-env.d.ts
 #Coder(AI do Flow)
 .coder
 .coderignore
+
+# Coverage
+coverage/
