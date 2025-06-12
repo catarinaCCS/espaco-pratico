@@ -17,6 +17,7 @@
   },
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/main.ts",
-     "test": "jest"
+     "test": "jest",
+     "test:silent": "jest --silent --watchAll --noStackTrace"
   }
 }
