@@ -2,6 +2,7 @@ import { TUserProperties, User } from "../../../../../domain/entities/userEntity
 import UserModel from "../../models/user.model";
 import { IUserDocument } from "../../schemas/user.schema";
 import { IUserRepository } from "../../../../../domain/interfaces/repositories/user-repository.interface";
+import { Error } from "mongoose";
 
 export class UserRepository implements IUserRepository {
 
@@ -16,10 +17,15 @@ export class UserRepository implements IUserRepository {
             return this.mapToEntity(newUser);
         }
         catch (error) {
-          console.error("Error creating user:", error);
-          throw error
-        }
 
+            if (error instanceof Error && error.name === 'MongoServerError'){
+                console.error("User with this email already exists:", error);
+                throw new Error("User with this email already exists");
+            }
+
+            console.error("Error creating user:", error);
+            throw error;
+        }       
     }
 
     async findUserById(id: string): Promise<User | null> {
@@ -82,17 +88,11 @@ export class UserRepository implements IUserRepository {
 
         if (!document) throw new Error("Document is null or undefined");
 
-        try { 
-            return new User({
-                id: document._id.toString(),
-                fullName: document.fullName,
-                email: document.email,
-                password: document.password,
-            })
-        }
-        catch (error) {
-            console.error("Error mapping document to User entity:", error);
-            throw error;
-        }
+        return new User({
+            id: document._id.toString(),
+            fullName: document.fullName,
+            email: document.email,
+            password: document.password,
+         })
     }
 }
