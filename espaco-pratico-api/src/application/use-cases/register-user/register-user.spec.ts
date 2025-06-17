@@ -1,6 +1,5 @@
 import { RegisterUserUseCase } from "./register-user.use-case";
 import { IUserRepository } from "../../../domain/interfaces/repositories/user-repository.interface";
-import { User } from "../../../domain/entities/userEntity/user.entity";
 
 const mockUserData = {
     fullName: "John Doe",
