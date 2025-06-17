@@ -13,7 +13,7 @@ const mockUser = {
     _fullName: mockUserData.fullName,
     _email: mockUserData.email,
     _password: mockUserData.password,
-}
+};
 
 const mockUserRepository: IUserRepository = {
     createUser: jest.fn(),
@@ -39,7 +39,7 @@ describe("Validate required fields", () => {
         const userData = {
             ...mockUserData,
             fullName: "",
-        }
+        };
 
         expect(() => registerUserUseCase.validateRequiredFields(userData)).toThrow("All fields are required: fullName, email, and password.");
     });
@@ -48,7 +48,7 @@ describe("Validate required fields", () => {
         const userData = {
             ...mockUserData,
             email: "",
-        }
+        };
 
         expect(() => registerUserUseCase.validateRequiredFields(userData)).toThrow("All fields are required: fullName, email, and password.");
     });
@@ -79,7 +79,7 @@ describe("Validate email does not exist", () => {
 
         expect(mockUserRepository.findUserByEmail).toHaveBeenCalledWith('johndoe@test.com');
     });
-})
+});
 
 describe("Generate user ID", () => {
     it("should generate a valid UUID", () => {
@@ -99,8 +99,8 @@ describe("Generate user ID", () => {
         expect(userId1).not.toBe(userId2);
         expect(userId1).not.toBe(userId3);
         expect(userId2).not.toBe(userId3);
-    })
-})
+    });
+});
 
 describe("Execute use case", () => {
     it("should call repository with correct user object when creating a user", async () => {
