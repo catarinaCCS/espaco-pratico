@@ -2,8 +2,7 @@ import { RegisterUserUseCase } from "../../../application/use-cases/register-use
 import { LoginUserUseCase } from "../../../application/use-cases/login-user/login-user.use-case";
 import { ILoginUserDTO } from "../../../application/dto/login-user.dto";
 import { IRegisterUserDTO } from "../../../application/dto/register-user.dto";
-import { Controller, HttpException, HttpStatus, Post } from "@nestjs/common";
-import { stat } from "fs";
+import { Body, Controller, HttpException, HttpStatus, Post } from "@nestjs/common";
 
 @Controller('users')
 export class UserController {
@@ -13,7 +12,7 @@ export class UserController {
     ) {}
 
     @Post('register')
-    async register(userData: IRegisterUserDTO) {
+    async register(@Body() userData: IRegisterUserDTO) {
         try {
             const user = await this.registerUserUseCase.execute(userData);
             return {
@@ -45,9 +44,9 @@ export class UserController {
     }
 
     @Post('login')
-    async login(loginData: ILoginUserDTO) {
+    async login(@Body() loginData: ILoginUserDTO) {
         try {
-            const isAuthenticated = await this.loginUserUseCase.login(loginData);
+            const isAuthenticated = await this.loginUserUseCase.execute(loginData);
         
         if (!isAuthenticated) {
             throw new HttpException({
