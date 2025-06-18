@@ -21,24 +21,15 @@ beforeEach(() => {
     jest.clearAllMocks();
 });
 
-describe("validateData", () => {
-    it("should not throw an error if email and password are provided", () => {
-        expect(() => loginUserUseCase.validateData(mockData)).not.toThrow();
-    });
-
-    it("should throw an error if email is missing", () => {
-   
-        expect(() => loginUserUseCase.validateData({ ...mockData, email: "" })).toThrow("Email and password are required");
-    });
-
-    it("should throw an error if password is missing", () => {
-   
-        expect(() => loginUserUseCase.validateData({ ...mockData, password: "" })).toThrow("Email and password are required");
-    });
-});
-
 describe("Login", () => {
 
+    it("should throw an errorr if email is missing", async () => {
+        await expect(loginUserUseCase.login({ ...mockData, email: "" })).rejects.toThrow("Email and password are required");
+    });
+
+    it("should throw an error if password is missing", async () => {
+        await expect(loginUserUseCase.login({ ...mockData, password: "" })).rejects.toThrow("Email and password are required");
+    });
 
     it("should return false if user is not found", async () => {
         mockUserRepository.findUserByEmail = jest.fn().mockResolvedValue(null);
@@ -65,11 +56,11 @@ describe("Login", () => {
         expect(result).toBe(false);
     });
 
-    it("should call validateData with the correct parameters", () => {
-        const validateDataSpy = jest.spyOn(loginUserUseCase, "validateData");
+    it("should call Login with the correct parameters", () => {
+        const loginSpy = jest.spyOn(loginUserUseCase, "login");
 
         loginUserUseCase.login(mockData);
-        expect(validateDataSpy).toHaveBeenCalledWith(mockData);
+        expect(loginSpy).toHaveBeenCalledWith(mockData);
     });
 
     it("should call confirmEmail with the correct email", async () => {
@@ -77,5 +68,18 @@ describe("Login", () => {
 
         await loginUserUseCase.login(mockData);
         expect(confirmEmailSpy).toHaveBeenCalledWith(mockData.email);
+    });
+
+    it ("should reutrn boolean", async () => {
+        const mockUser = { ...mockData, id: "123" };
+
+        mockUserRepository.findUserByEmail = jest.fn().mockResolvedValue(mockUser);
+
+        const result = await loginUserUseCase.login(mockData);
+        expect(typeof result).toBe("boolean");
+    });
+
+    it("should error be the kind of Error", async () => {
+        await expect(loginUserUseCase.login({ ...mockData, email: "" })).rejects.toBeInstanceOf(Error);
     });
 });

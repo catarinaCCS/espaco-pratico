@@ -19,7 +19,7 @@ export class LoginUserUseCase {
 
     }
 
-    validateData(data: ILoginUserDTO): void {
+    private validateData(data: ILoginUserDTO): void {
         if (!data.email || !data.password) {
             throw new Error("Email and password are required");
         }
