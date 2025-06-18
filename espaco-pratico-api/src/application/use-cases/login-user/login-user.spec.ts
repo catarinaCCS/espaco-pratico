@@ -63,11 +63,11 @@ describe("Login", () => {
         expect(loginSpy).toHaveBeenCalledWith(mockData);
     });
 
-    it("should call confirmEmail with the correct email", async () => {
-        const confirmEmailSpy = jest.spyOn(mockUserRepository, "findUserByEmail");
+    it("should call findUserByEmail with the correct email", async () => {
+        const findUserByEmail = jest.spyOn(mockUserRepository, "findUserByEmail");
 
         await loginUserUseCase.login(mockData);
-        expect(confirmEmailSpy).toHaveBeenCalledWith(mockData.email);
+        expect(findUserByEmail).toHaveBeenCalledWith(mockData.email);
     });
 
     it ("should return boolean", async () => {

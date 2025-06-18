@@ -9,7 +9,7 @@ export class LoginUserUseCase {
         const { email, password } = data;
 
         this.validateData(data);
-        const user = await this.findUserByEmail(email);
+        const user = await this.userRepository.findUserByEmail(email);
 
         if (!user) {
             return false;
@@ -23,9 +23,5 @@ export class LoginUserUseCase {
         if (!data.email || !data.password) {
             throw new Error("Email and password are required");
         }
-    }
-
-    private async findUserByEmail(email: string): Promise<User | null> {
-        return await this.userRepository.findUserByEmail(email);
     }
 }
