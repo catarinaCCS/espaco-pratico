@@ -4,7 +4,7 @@ import { IUserRepository } from "../../../domain/interfaces/repositories/user-re
 export class LoginUserUseCase {
     constructor(private readonly userRepository: IUserRepository) {}
 
-    async login(data: ILoginUserDTO): Promise<boolean> {
+    async execute(data: ILoginUserDTO): Promise<boolean> {
         const { email, password } = data;
 
         this.validateData(data);
