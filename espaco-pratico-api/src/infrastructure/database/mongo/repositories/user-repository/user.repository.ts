@@ -1,16 +1,20 @@
 import { TUserProperties, User } from "../../../../../domain/entities/userEntity/user.entity";
-import UserModel from "../../models/user.model";
 import { IUserDocument } from "../../schemas/user.schema";
 import { IUserRepository } from "../../../../../domain/interfaces/repositories/user-repository.interface";
-import { Error } from "mongoose";
+import { Error, Model } from "mongoose";
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from "@nestjs/mongoose";
 @Injectable()
 export class UserRepository implements IUserRepository {
 
+    constructor(
+        @InjectModel('User') private readonly userModel: Model<IUserDocument>
+    ) {}
+    
     async createUser(user: User): Promise<User> {
 
         try {
-            const newUser = await UserModel.create({
+            const newUser = await this.userModel.create({
                 fullName: user.fullName,
                 email: user.email,
                 password: user.password,
@@ -31,7 +35,7 @@ export class UserRepository implements IUserRepository {
 
     async findUserById(id: string): Promise<User | null> {
         try {
-            const user = await UserModel.findById(id).exec();
+            const user = await this.userModel.findById(id).exec();
             
             return user ? this.mapToEntity(user) : null;
         }
@@ -44,7 +48,7 @@ export class UserRepository implements IUserRepository {
     async findUserByEmail(email: string): Promise<User | null> {
         
         try {
-            const user = await UserModel.findOne({ email }).exec();
+            const user = await this.userModel.findOne({ email }).exec();
     
             return user ? this.mapToEntity(user) : null;
         }
@@ -57,7 +61,7 @@ export class UserRepository implements IUserRepository {
     async updateUser(id: string, userData: Partial<TUserProperties>): Promise<User | null> {
 
         try {
-            const updateUser = await UserModel.findByIdAndUpdate(
+            const updateUser = await this.userModel.findByIdAndUpdate(
                 id,
                 { ...userData },
                 { new: true },
@@ -74,7 +78,7 @@ export class UserRepository implements IUserRepository {
     async deleteUser(id: string): Promise<boolean> {
 
         try {
-            const result = await UserModel.findByIdAndDelete(id).exec();
+            const result = await this.userModel.findByIdAndDelete(id).exec();
     
             return result !== null;
         }
