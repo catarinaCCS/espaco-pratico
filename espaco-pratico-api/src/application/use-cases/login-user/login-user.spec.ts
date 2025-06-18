@@ -8,7 +8,7 @@ const mockData: ILoginUserDTO = {
 };
 
 const mockUserRepository: IUserRepository = {
-    findUserByEmail:jest.fn(),
+    findUserByEmail: jest.fn(),
     createUser: jest.fn(),
     updateUser: jest.fn(),
     deleteUser: jest.fn(),
@@ -23,7 +23,7 @@ beforeEach(() => {
 
 describe("Login", () => {
 
-    it("should throw an errorr if email is missing", async () => {
+    it("should throw an error if email is missing", async () => {
         await expect(loginUserUseCase.login({ ...mockData, email: "" })).rejects.toThrow("Email and password are required");
     });
 
@@ -70,7 +70,7 @@ describe("Login", () => {
         expect(confirmEmailSpy).toHaveBeenCalledWith(mockData.email);
     });
 
-    it ("should reutrn boolean", async () => {
+    it ("should return boolean", async () => {
         const mockUser = { ...mockData, id: "123" };
 
         mockUserRepository.findUserByEmail = jest.fn().mockResolvedValue(mockUser);

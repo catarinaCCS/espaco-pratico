@@ -9,13 +9,13 @@ export class LoginUserUseCase {
         const { email, password } = data;
 
         this.validateData(data);
-        const user = await this.confirmEmail(email);
+        const user = await this.findUserByEmail(email);
 
         if (!user) {
             return false;
         }
 
-        return password === user.password 
+        return password === user.password;
 
     }
 
@@ -25,7 +25,7 @@ export class LoginUserUseCase {
         }
     }
 
-    private async confirmEmail(email: string): Promise<User | null> {
+    private async findUserByEmail(email: string): Promise<User | null> {
         return await this.userRepository.findUserByEmail(email);
     }
 }
