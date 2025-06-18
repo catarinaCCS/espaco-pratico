@@ -2,10 +2,15 @@ import { IUserRepository } from "../../../domain/interfaces/repositories/user-re
 import { User, TUserProperties} from "../../../domain/entities/userEntity/user.entity";
 import { IRegisterUserDTO } from "../../dto/register-user.dto";
 import crypto from "crypto";
+import { Injectable, Inject } from '@nestjs/common';
+import { UserRepository } from "../../../infrastructure/database/mongo/repositories/user-repository/user.repository";
 
+@Injectable()
 export class RegisterUserUseCase {
 
-    constructor(private readonly userRepository: IUserRepository) {}
+    constructor(
+        @Inject(UserRepository) private readonly userRepository: IUserRepository
+    ) {}
     
     async execute(userData: IRegisterUserDTO): Promise<User> {
         try {

@@ -3,7 +3,8 @@ import UserModel from "../../models/user.model";
 import { IUserDocument } from "../../schemas/user.schema";
 import { IUserRepository } from "../../../../../domain/interfaces/repositories/user-repository.interface";
 import { Error } from "mongoose";
-
+import { Injectable } from '@nestjs/common';
+@Injectable()
 export class UserRepository implements IUserRepository {
 
     async createUser(user: User): Promise<User> {
@@ -29,7 +30,6 @@ export class UserRepository implements IUserRepository {
     }
 
     async findUserById(id: string): Promise<User | null> {
-        
         try {
             const user = await UserModel.findById(id).exec();
             
