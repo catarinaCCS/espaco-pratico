@@ -33,4 +33,3 @@ export const userSchema = new mongoose.Schema<IUserDocument>(
 );
 
 userSchema.index({ fullName: 1 });
-userSchema.index({ email: 1 });
