@@ -24,17 +24,17 @@ beforeEach(() => {
 describe("Login", () => {
 
     it("should throw an error if email is missing", async () => {
-        await expect(loginUserUseCase.login({ ...mockData, email: "" })).rejects.toThrow("Email and password are required");
+        await expect(loginUserUseCase.execute({ ...mockData, email: "" })).rejects.toThrow("Email and password are required");
     });
 
     it("should throw an error if password is missing", async () => {
-        await expect(loginUserUseCase.login({ ...mockData, password: "" })).rejects.toThrow("Email and password are required");
+        await expect(loginUserUseCase.execute({ ...mockData, password: "" })).rejects.toThrow("Email and password are required");
     });
 
     it("should return false if user is not found", async () => {
         mockUserRepository.findUserByEmail = jest.fn().mockResolvedValue(null);
 
-        const result = await loginUserUseCase.login({...mockData, email: "notexist@email.com"});
+        const result = await loginUserUseCase.execute({...mockData, email: "notexist@email.com"});
         expect(result).toBe(false);
     });
 
@@ -43,7 +43,7 @@ describe("Login", () => {
 
         mockUserRepository.findUserByEmail = jest.fn().mockResolvedValue(mockUser);
 
-        const result = await loginUserUseCase.login(mockData);
+        const result = await loginUserUseCase.execute(mockData);
         expect(result).toBe(true);
     });
 
@@ -52,21 +52,21 @@ describe("Login", () => {
 
         mockUserRepository.findUserByEmail = jest.fn().mockResolvedValue(mockUser);
 
-        const result = await loginUserUseCase.login(mockData);
+        const result = await loginUserUseCase.execute(mockData);
         expect(result).toBe(false);
     });
 
     it("should call Login with the correct parameters", () => {
-        const loginSpy = jest.spyOn(loginUserUseCase, "login");
+        const loginSpy = jest.spyOn(loginUserUseCase, "execute");
 
-        loginUserUseCase.login(mockData);
+        loginUserUseCase.execute(mockData);
         expect(loginSpy).toHaveBeenCalledWith(mockData);
     });
 
     it("should call findUserByEmail with the correct email", async () => {
         const findUserByEmail = jest.spyOn(mockUserRepository, "findUserByEmail");
 
-        await loginUserUseCase.login(mockData);
+        await loginUserUseCase.execute(mockData);
         expect(findUserByEmail).toHaveBeenCalledWith(mockData.email);
     });
 
@@ -75,11 +75,11 @@ describe("Login", () => {
 
         mockUserRepository.findUserByEmail = jest.fn().mockResolvedValue(mockUser);
 
-        const result = await loginUserUseCase.login(mockData);
+        const result = await loginUserUseCase.execute(mockData);
         expect(typeof result).toBe("boolean");
     });
 
     it("should error be the kind of Error", async () => {
-        await expect(loginUserUseCase.login({ ...mockData, email: "" })).rejects.toBeInstanceOf(Error);
+        await expect(loginUserUseCase.execute({ ...mockData, email: "" })).rejects.toBeInstanceOf(Error);
     });
 });
