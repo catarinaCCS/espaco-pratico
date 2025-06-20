@@ -33,7 +33,7 @@ export class UserController {
             }
         }
         catch (error) {
-            return this.handleError(error, HttpStatus.BAD_REQUEST);
+            this.handleError(error, HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -57,7 +57,7 @@ export class UserController {
             };
         } 
         catch (error) {
-            return this.handleError(error, HttpStatus.UNAUTHORIZED);
+            this.handleError(error, HttpStatus.UNAUTHORIZED);
         }
     }
 
