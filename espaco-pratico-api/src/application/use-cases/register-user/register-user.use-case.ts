@@ -4,9 +4,10 @@ import { IRegisterUserDTO } from "../../dto/register-user.dto";
 import crypto from "crypto";
 import { Injectable, Inject } from '@nestjs/common';
 import { UserRepository } from "../../../infrastructure/database/mongo/repositories/user-repository/user.repository";
+import { IRegisterUserUseCase } from "../interfaces/use-cases/register-user.interface";
 
 @Injectable()
-export class RegisterUserUseCase {
+export class RegisterUserUseCase implements IRegisterUserUseCase {
 
     constructor(
         @Inject(UserRepository) private readonly userRepository: IUserRepository

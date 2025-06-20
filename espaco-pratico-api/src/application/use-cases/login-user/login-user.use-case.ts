@@ -2,8 +2,9 @@ import { ILoginUserDTO } from "../../dto/login-user.dto";
 import { IUserRepository } from "../../../domain/interfaces/repositories/user-repository.interface";
 import { Injectable, Inject } from '@nestjs/common';
 import { UserRepository } from "../../../infrastructure/database/mongo/repositories/user-repository/user.repository";
+import { ILoginUserUseCase } from "../interfaces/use-cases/login-user.interface";
 @Injectable()
-export class LoginUserUseCase {
+export class LoginUserUseCase implements ILoginUserUseCase {
     constructor(
        @Inject(UserRepository) private readonly userRepository: IUserRepository
     ) {}

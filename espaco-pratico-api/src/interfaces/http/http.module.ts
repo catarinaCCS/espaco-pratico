@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './controllers/app.controller';
-import { UserController } from './controllers/user.controller';
+import { UserController } from './controllers/user/user.controller';
 import { LoginUserUseCase } from '../../application/use-cases/login-user/login-user.use-case';
 import { RegisterUserUseCase } from '../../application/use-cases/register-user/register-user.use-case';
 import { UserRepository } from '../../infrastructure/database/mongo/repositories/user-repository/user.repository';
