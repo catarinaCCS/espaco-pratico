@@ -22,7 +22,7 @@ describe('UserRepository', () => {
   let mockId: string;
 
   beforeEach(() => {
-    userRepository = new UserRepository();
+    userRepository = new UserRepository(UserModel);
     mockId = new mongoose.Types.ObjectId().toString();
     
     mockUser = new User({

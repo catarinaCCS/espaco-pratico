@@ -1,13 +1,19 @@
 import { IUserRepository } from "../../../domain/interfaces/repositories/user-repository.interface";
 import { User, TUserProperties} from "../../../domain/entities/userEntity/user.entity";
-import { ICreateUserDTO } from "../../dto/create-user.dto";
+import { IRegisterUserDTO } from "../../dto/register-user.dto";
 import crypto from "crypto";
+import { Injectable, Inject } from '@nestjs/common';
+import { UserRepository } from "../../../infrastructure/database/mongo/repositories/user-repository/user.repository";
+import { IRegisterUserUseCase } from "../interfaces/use-cases/register-user.interface";
 
-export class RegisterUserUseCase {
+@Injectable()
+export class RegisterUserUseCase implements IRegisterUserUseCase {
 
-    constructor(private readonly userRepository: IUserRepository) {}
+    constructor(
+        @Inject(UserRepository) private readonly userRepository: IUserRepository
+    ) {}
     
-    async execute(userData: ICreateUserDTO): Promise<User> {
+    async execute(userData: IRegisterUserDTO): Promise<User> {
         try {
 
             this.validateRequiredFields(userData);
@@ -36,7 +42,7 @@ export class RegisterUserUseCase {
         }
     }
 
-    validateRequiredFields(userData: ICreateUserDTO): void {
+    validateRequiredFields(userData: IRegisterUserDTO): void {
 
         if (!userData.fullName || !userData.email || !userData.password) {
             throw new Error("All fields are required: fullName, email, and password.");

@@ -1,11 +1,15 @@
 import { ILoginUserDTO } from "../../dto/login-user.dto";
 import { IUserRepository } from "../../../domain/interfaces/repositories/user-repository.interface";
-import { User } from "../../../domain/entities/userEntity/user.entity";
+import { Injectable, Inject } from '@nestjs/common';
+import { UserRepository } from "../../../infrastructure/database/mongo/repositories/user-repository/user.repository";
+import { ILoginUserUseCase } from "../interfaces/use-cases/login-user.interface";
+@Injectable()
+export class LoginUserUseCase implements ILoginUserUseCase {
+    constructor(
+       @Inject(UserRepository) private readonly userRepository: IUserRepository
+    ) {}
 
-export class LoginUserUseCase {
-    constructor(private readonly userRepository: IUserRepository) {}
-
-    async login(data: ILoginUserDTO): Promise<boolean> {
+    async execute(data: ILoginUserDTO): Promise<boolean> {
         const { email, password } = data;
 
         this.validateData(data);
