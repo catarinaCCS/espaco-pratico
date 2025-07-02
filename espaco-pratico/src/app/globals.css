@@ -1,2 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
+@theme {
+    --font-Inter: 'Inter', sans-serif;
+    --font-Roboto: 'Roboto', sans-serif;
+    --tracking-h1: 0.1664rem;
+    --tracking-input: 0.03125rem;
+    --tracking-button: 0.078125rem;
+    --color-input-border: rgba(0, 0, 0, 0.42);
+    --color-button-background: #1976D2; 
+}
+
+@layer base {
+
+    body {
+        padding-top: 202px;
+    }
+
+    h1 {
+        font-family: var(--font-Inter);
+        font-size: 1.25rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-h1);
+        margin-bottom: 48px;
+    }
+
+    input {
+
+        font-family: var(--font-Roboto);
+        color: black;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5rem;
+        letter-spacing: var(--traacking-input);
+        width: 410px;
+        height: 41px;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid var(--color-input-border);
+    }
+
+    input::placeholder {
+        color: black;
+    }
+
+    button {
+        font-family: var(--font-Roboto);
+        color: white;
+        background-color: var(--color-button-background);
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 2.25rem;
+        letter-spacing: var(--tracking-button);
+        text-align: center;
+        width: 175px;
+        height: 36px;
+        border-radius: 50px;
+        padding: 0 1rem;
+        cursor: pointer;
+    }
+}
+
+@layer components {
+
+    .authentication {
+        @apply flex flex-col items-center h-screen;
+    }
+
+    .authentication-form {
+        @apply flex flex-col items-center gap-[50px] mb-[98px];
+    }
+}
