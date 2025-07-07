@@ -6,6 +6,7 @@ import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
 import { userService } from "@/services/userServices";
 import { useToast } from "@/contexts/ToastContext";
+import { log } from "console";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
@@ -46,21 +47,29 @@ export default function LoginPage() {
         setIsLoading(true);
         
         try {
-            await userService.login({ email, password });
-            showToast("Login realizado com sucesso!", "success");
-            
-            // Redirect to home page after successful login
-            setTimeout(() => {
-                router.push("/");
-            }, 1000);
-        } catch (error: any) {
-            console.error("Login error:", error);
-            
-            if (error.response?.data?.message) {
-                showToast(error.response.data.message, "error");
-            } else {
-                showToast("Erro ao fazer login. Verifique suas credenciais.", "error");
+
+            const loggedUser =  await userService.login({ email, password });
+
+            if( loggedUser.statusCode === 401) {
+                showToast("Email ou senha inválidos.", "error");
+                return;
             }
+
+            if (loggedUser.statusCode === 500) {
+                showToast("Erro ao realizar login. Tente novamente mais tarde.", "error");
+                return;
+            }
+            
+            if (loggedUser.statusCode === 200) {
+                showToast("Login realizado com sucesso!", "success");
+                router.push("/");
+            }
+            
+        } catch (error) {
+
+            console.error("Erro ao realizar login:", error);
+            showToast("Erro ao realizar login. Tente novamente mais tarde.", "error");
+            
         } finally {
             setIsLoading(false);
         }
