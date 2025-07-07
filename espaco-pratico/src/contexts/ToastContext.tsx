@@ -1,13 +1,8 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, ReactNode } from 'react';
 import Toast, { ToastType } from '@/components/Toast/Toast';
-
-interface ToastMessage {
-  id: string;
-  message: string;
-  type: ToastType;
-}
+import { useToastManager } from '@/hooks/useToastManager';
 
 interface ToastContextType {
   showToast: (message: string, type: ToastType) => void;
@@ -16,16 +11,7 @@ interface ToastContextType {
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
 export function ToastProvider({ children }: { children: ReactNode }) {
-  const [toasts, setToasts] = useState<ToastMessage[]>([]);
-
-  const showToast = (message: string, type: ToastType) => {
-    const id = crypto.randomUUID();
-    setToasts((prev) => [...prev, { id, message, type }]);
-  };
-
-  const removeToast = (id: string) => {
-    setToasts((prev) => prev.filter((toast) => toast.id !== id));
-  };
+  const { toasts, showToast, removeToast } = useToastManager();
 
   return (
     <ToastContext.Provider value={{ showToast }}>
