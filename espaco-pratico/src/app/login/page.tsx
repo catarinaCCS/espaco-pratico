@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
-import { userService } from "@/services/userService";
+import { userService } from "@/services/userServices";
 import { useToast } from "@/contexts/ToastContext";
 
 export default function LoginPage() {
