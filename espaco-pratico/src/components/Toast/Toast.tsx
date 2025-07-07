@@ -1,8 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import './Toast.css';
-
 export type ToastType = 'success' | 'error';
 
 interface ToastProps {
@@ -18,7 +16,7 @@ export default function Toast({ message, type, duration = 3000, onClose }: Toast
   useEffect(() => {
     const timer = setTimeout(() => {
       setVisible(false);
-      setTimeout(onClose, 300); // Allow animation to complete before removing
+      setTimeout(onClose, 300);
     }, duration);
 
     return () => clearTimeout(timer);
