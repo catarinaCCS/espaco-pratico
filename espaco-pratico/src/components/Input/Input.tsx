@@ -1,16 +1,15 @@
 'use strict';
 
-interface InputProps {
-    type: string;
+type InputProps = {
     placeholder?: string;
-    
-}
+} & React.ComponentProps<'input'>;
 
-export default function Input(props: InputProps) {
+export default function Input({ placeholder, type, ...props }: InputProps) {
     return (
         <input
-            type={props.type}
-            placeholder={props.placeholder}
+            type={type}
+            placeholder={placeholder}
+            {...props}
         />
     );
 }

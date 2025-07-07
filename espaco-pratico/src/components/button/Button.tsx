@@ -1,16 +1,17 @@
 'use client';
 
-interface InputProps {
+type InputProps = {
     children: React.ReactNode;
     onClick?: () => void;
-}
+} & React.ComponentProps<'button'>;
 
-export default function Button(props: InputProps) {
+export default function Button({ children, onClick, ...props }: InputProps) {
     return (
         <button 
-            onClick={props.onClick}
+            onClick={onClick}
+            {...props}
         >
-            {props.children }
+            {children }
         </button>
     );
 }

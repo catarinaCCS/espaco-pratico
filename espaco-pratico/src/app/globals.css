@@ -58,6 +58,11 @@
         border-radius: 50px;
         padding: 0 1rem;
         cursor: pointer;
+        transition: all 0.2s ease-in-out;
+    }
+
+    button:hover {
+        filter: brightness(0.95);
     }
 }
 
