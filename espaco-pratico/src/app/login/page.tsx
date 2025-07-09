@@ -16,7 +16,7 @@ export default function LoginPage() {
     } = useAuth();
 
     return (
-        <form onSubmit={handleLogin} className="authentication">
+        <form role="form" onSubmit={handleLogin} className="authentication">
             <h1>Login</h1>
             <div className="authentication-form">
                 <div className="input-container">

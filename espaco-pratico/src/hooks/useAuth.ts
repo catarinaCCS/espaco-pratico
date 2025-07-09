@@ -46,13 +46,13 @@ export function useAuth() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
 
     setIsLoading(true);
-    
+
     try {
       const loggedUser = await userService.login({ email, password });
 
@@ -65,12 +65,12 @@ export function useAuth() {
         showToast("Erro ao realizar login. Tente novamente mais tarde.", "error");
         return;
       }
-      
+
       if (loggedUser.statusCode === 200) {
         showToast("Login realizado com sucesso!", "success");
         router.push("/");
       }
-      
+
     } catch (error) {
       console.error("Erro ao realizar login:", error);
       showToast("Erro ao realizar login. Tente novamente mais tarde.", "error");
@@ -86,6 +86,7 @@ export function useAuth() {
     setPassword,
     isLoading,
     errors,
-    handleLogin
+    handleLogin,
+    validateForm
   };
 }

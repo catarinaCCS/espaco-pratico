@@ -34,7 +34,7 @@ export const userService = {
             message: "Email ou senha inválidos."
           }
         }
-    
+
         if (error.message.includes('500')) {
           return {
             statusCode: 500,
