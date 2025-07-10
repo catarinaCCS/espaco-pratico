@@ -12,7 +12,7 @@ export default function LoginPage() {
         setPassword,
         isLoading,
         errors,
-        handleLogin
+        handleLogin,
     } = useAuth();
 
     return (

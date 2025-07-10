@@ -8,7 +8,7 @@
     --tracking-input: 0.03125rem;
     --tracking-button: 0.078125rem;
     --color-input-border: rgba(0, 0, 0, 0.42);
-    --color-button-background: #1976D2; 
+    --color-button-background: #1976D2;
     --color-error: #f44336;
 }
 
@@ -42,6 +42,10 @@
 
     input::placeholder {
         color: black;
+    }
+
+    input:focus {
+        outline: none;
     }
 
     button {
@@ -90,42 +94,42 @@
     }
 
     .toast {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 16px 24px;
-    border-radius: 4px;
-    color: white;
-    font-family: var(--font-Roboto);
-    font-size: 0.875rem;
-    max-width: 350px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 16px 24px;
+        border-radius: 4px;
+        color: white;
+        font-family: var(--font-Roboto);
+        font-size: 0.875rem;
+        max-width: 350px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     .toast.visible {
-    opacity: 1;
-    transform: translateY(0);
+        opacity: 1;
+        transform: translateY(0);
     }
 
     .toast.hidden {
-    opacity: 0;
-    transform: translateY(-20px);
+        opacity: 0;
+        transform: translateY(-20px);
     }
 
     .toast.success {
-    background-color: #4caf50;
+        background-color: #4caf50;
     }
 
     .toast.error {
-    background-color: #f44336;
+        background-color: #f44336;
     }
 
     .toast-content {
-    display: flex;
-    align-items: center;
+        display: flex;
+        align-items: center;
     }
 }
