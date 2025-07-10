@@ -1,2 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
+@theme {
+    --font-Inter: 'Inter', sans-serif;
+    --font-Roboto: 'Roboto', sans-serif;
+    --tracking-h1: 0.1664rem;
+    --tracking-input: 0.03125rem;
+    --tracking-button: 0.078125rem;
+    --color-input-border: rgba(0, 0, 0, 0.42);
+    --color-button-background: #1976D2; 
+    --color-error: #f44336;
+}
+
+@layer base {
+
+    body {
+        padding-top: 202px;
+    }
+
+    h1 {
+        font-family: var(--font-Inter);
+        font-size: 1.25rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-h1);
+        margin-bottom: 48px;
+    }
+
+    input {
+        font-family: var(--font-Roboto);
+        color: black;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5rem;
+        letter-spacing: var(--traacking-input);
+        width: 410px;
+        height: 41px;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid var(--color-input-border);
+    }
+
+    input::placeholder {
+        color: black;
+    }
+
+    button {
+        font-family: var(--font-Roboto);
+        color: white;
+        background-color: var(--color-button-background);
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 2.25rem;
+        letter-spacing: var(--tracking-button);
+        text-align: center;
+        width: 175px;
+        height: 36px;
+        border-radius: 50px;
+        padding: 0 1rem;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+    }
+
+    button:hover {
+        filter: brightness(0.95);
+    }
+
+    button:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+}
+
+@layer components {
+
+    .authentication {
+        @apply flex flex-col items-center h-screen;
+    }
+
+    .authentication-form {
+        @apply flex flex-col items-center gap-[50px] mb-[98px];
+    }
+
+    .input-container {
+        @apply flex flex-col items-start w-full;
+    }
+
+    .error-message {
+        @apply text-xs text-[var(--color-error)] mt-1 font-[var(--font-Roboto)];
+    }
+
+    .toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 16px 24px;
+    border-radius: 4px;
+    color: white;
+    font-family: var(--font-Roboto);
+    font-size: 0.875rem;
+    max-width: 350px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .toast.visible {
+    opacity: 1;
+    transform: translateY(0);
+    }
+
+    .toast.hidden {
+    opacity: 0;
+    transform: translateY(-20px);
+    }
+
+    .toast.success {
+    background-color: #4caf50;
+    }
+
+    .toast.error {
+    background-color: #f44336;
+    }
+
+    .toast-content {
+    display: flex;
+    align-items: center;
+    }
+}
