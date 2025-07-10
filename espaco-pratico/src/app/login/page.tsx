@@ -1,6 +1,6 @@
 'use client';
 
-import Button from "@/components/Button/Button";
+import Button from "@/components/button/Button";
 import Input from "@/components/Input/Input";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -20,7 +20,7 @@ export default function LoginPage() {
             <h1>Login</h1>
             <div className="authentication-form">
                 <div className="input-container">
-                    <Input 
+                    <Input
                         placeholder="Email"
                         type="email"
                         value={email}
@@ -40,7 +40,7 @@ export default function LoginPage() {
                     {errors.password && <span className="error-message">{errors.password}</span>}
                 </div>
             </div>
-            <Button 
+            <Button
                 type="submit"
                 disabled={isLoading}
             >
