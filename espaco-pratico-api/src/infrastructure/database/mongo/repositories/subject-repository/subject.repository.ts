@@ -22,11 +22,6 @@ export class SubjectRepository implements ISubjectRepository {
         }
         catch (error) {
 
-            if (error instanceof Error && error.name === 'MongoServerError') {
-                console.error("Subject with this name already exists:", error);
-                throw new Error("Subject with this name already exists");
-            }
-
             console.error("Error creating subject:", error);
             throw error;
         }
