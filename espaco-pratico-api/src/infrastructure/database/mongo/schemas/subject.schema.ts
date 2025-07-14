@@ -12,7 +12,6 @@ export const subjectSchema = new mongoose.Schema<ISubjectDocument>(
             type: String,
             required: true,
             trim: true,
-            unique: true,
         },
     },
     {

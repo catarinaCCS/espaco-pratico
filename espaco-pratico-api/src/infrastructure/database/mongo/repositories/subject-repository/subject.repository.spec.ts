@@ -64,15 +64,6 @@ describe('SubjectRepository', () => {
 
             await expect(subjectRepository.createSubject(mockSubject)).rejects.toThrow(error);
         });
-
-        it('should throw an error if subject with name already exists', async () => {
-            const SubjectModel = require('../../models/subject.model').default;
-            const error = new Error('Subject with this name already exists');
-            error.name = 'MongoServerError';
-            (SubjectModel.create as jest.Mock).mockRejectedValue(error);
-
-            await expect(subjectRepository.createSubject(mockSubject)).rejects.toThrow('Subject with this name already exists');
-        });
     });
 
     describe('listSubjects', () => {
