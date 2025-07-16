@@ -8,7 +8,10 @@ export interface IRegisterResponseData {
     fullName: string;
     email: string;
 }
-
+export interface ICreateSubjectDTO {
+    id: string;
+    fullName: string;
+}
 export type TRegisterResponse = IApiResponse<IRegisterResponseData>;
 export type TLoginResponse = IApiResponse<null>;
-
+export type TCreateSubjectResponse = IApiResponse<ICreateSubjectDTO>;
