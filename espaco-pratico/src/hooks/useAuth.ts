@@ -10,11 +10,6 @@ interface LoginForm {
   password: string;
 }
 
-interface RegisterForm extends LoginForm {
-  fullName: string;
-  confirmPassword: string;
-}
-
 interface AuthErrors {
   email?: string;
   password?: string;

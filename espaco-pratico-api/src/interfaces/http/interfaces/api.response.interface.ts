@@ -1,7 +1,7 @@
 export interface IApiResponse<T> {
     statusCode: number;
     message: string;
-    data?: T;
+    data?: T | T[];
 }
 export interface IRegisterResponseData {
     id: string;
