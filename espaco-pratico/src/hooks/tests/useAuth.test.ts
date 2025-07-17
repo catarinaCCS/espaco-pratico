@@ -260,7 +260,7 @@ describe('useAuth', () => {
 
                     expect(mockShowToast).toHaveBeenCalledWith(expectedMessage, toastType);
                     if (shouldRedirect) {
-                        expect(mockPush).toHaveBeenCalledWith('/');
+                        expect(mockPush).toHaveBeenCalledWith('/subjects');
                     } else {
                         expect(mockPush).not.toHaveBeenCalled();
                     }

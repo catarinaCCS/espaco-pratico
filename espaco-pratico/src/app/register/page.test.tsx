@@ -103,7 +103,7 @@ describe('RegisterPage', () => {
     render(<RegisterPage />);
 
     expect(screen.getByRole('button', { name: /Criando conta.../i })).toBeInTheDocument();
-    expect(screen.getByRole('button')).toBeDisabled();
+    expect(screen.getByRole('button', { name: /Criando conta.../i })).toBeDisabled();
   });
 
   it('should display fullName error message when present', () => {
