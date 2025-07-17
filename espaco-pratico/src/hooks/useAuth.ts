@@ -109,7 +109,7 @@ export function useAuth() {
 
       if (loggedUser.statusCode === 200) {
         showToast("Login realizado com sucesso!", "success");
-        router.push("/");
+        router.push("/subjects");
       }
 
     } catch (error) {
