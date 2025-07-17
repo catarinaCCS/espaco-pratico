@@ -3,7 +3,7 @@
 import Button from "@/components/button/Button";
 import Input from "@/components/Input/Input";
 import { useAuth } from "@/hooks/useAuth";
-
+import Link from "next/link";
 
 export default function RegisterPage() {
     const {
@@ -71,6 +71,13 @@ export default function RegisterPage() {
             >
                 {isLoading ? "Criando conta..." : "Criar conta"}
             </Button>
+            <div className="mt-4">
+                <Link href="/login">
+                    <Button type="button" className="secondary-button">
+                        Já tenho uma conta
+                    </Button>
+                </Link>
+            </div>
         </form>
     );
 }
