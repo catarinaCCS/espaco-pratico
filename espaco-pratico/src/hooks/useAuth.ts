@@ -10,11 +10,6 @@ interface LoginForm {
   password: string;
 }
 
-interface RegisterForm extends LoginForm {
-  fullName: string;
-  confirmPassword: string;
-}
-
 interface AuthErrors {
   email?: string;
   password?: string;
@@ -71,6 +66,14 @@ export function useAuth() {
       isValid = false;
     }
 
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,}$/;
+    const result = passwordRegex.test(password);
+
+    if (!result) {
+      newErrors.password = "Senha deve ter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, números e símbolos";
+      isValid = false;
+    }
+
     if (!fullName) {
       newErrors.fullName = "Nome completo é obrigatório";
       isValid = false;
@@ -114,7 +117,7 @@ export function useAuth() {
 
       if (loggedUser.statusCode === 200) {
         showToast("Login realizado com sucesso!", "success");
-        router.push("/");
+        router.push("/subjects");
       }
 
     } catch (error) {

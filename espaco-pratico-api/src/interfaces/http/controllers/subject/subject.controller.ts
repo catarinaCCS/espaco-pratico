@@ -31,9 +31,15 @@ export class SubjectController {
     }
 
     @Get('list')
-    async list(): Promise<Subject[]> {
+    async list(): Promise<TCreateSubjectResponse> {
         try {
-            return await this.listSubjectsUseCase.execute();
+            const subjects = await this.listSubjectsUseCase.execute();
+
+            return {
+                statusCode: HttpStatus.CREATED,
+                message: 'Subjects retrieved successfully',
+                data: subjects
+            }
         } catch (error) {
             this.handleError(error, HttpStatus.INTERNAL_SERVER_ERROR);
         }
