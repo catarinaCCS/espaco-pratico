@@ -66,6 +66,14 @@ export function useAuth() {
       isValid = false;
     }
 
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,}$/;
+    const result = passwordRegex.test(password);
+
+    if (!result) {
+      newErrors.password = "Senha deve ter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, números e símbolos";
+      isValid = false;
+    }
+
     if (!fullName) {
       newErrors.fullName = "Nome completo é obrigatório";
       isValid = false;

@@ -74,7 +74,7 @@ export default function RegisterPage() {
             <div className="mt-4">
                 <Link href="/login">
                     <Button type="button" className="secondary-button">
-                        Já tenho uma conta
+                        Já tenho conta
                     </Button>
                 </Link>
             </div>
